@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\PlayerESP.cs" />
     <Compile Include="Tools\DrawSystem.cs" />
     <Compile Include="Tools\GameWorld.cs" />
     <Compile Include="Tools\Structures\ESPBase.cs" />
@@ -82,8 +83,6 @@
     <Compile Include="NLogHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
