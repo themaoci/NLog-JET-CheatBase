@@ -23,6 +23,10 @@ namespace NLog_Example_CheatBase.Tools
                 return _mainCamera;
             }
         }
+        public static Vector3 W2S(Vector3 vec) 
+        { // i dont like long names...
+            return MainCamera.WorldToScreenPoint(vec);
+        }
         public bool gameWorldLoaded {
             get 
             {
