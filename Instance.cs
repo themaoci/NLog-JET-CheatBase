@@ -1,5 +1,5 @@
-﻿using NLog_Example_CheatBase.Features;
-using NLog_Example_CheatBase.Tools;
+﻿using Cheat.Base.Features;
+using Cheat.Base.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase
+namespace Cheat.Base
 {
     public class Instance : MonoBehaviour
     {
@@ -28,6 +28,11 @@ namespace NLog_Example_CheatBase
         {
             if(settings.ESP.Player)
                 playerESP.Update();
+        }
+        private void OnGUI() 
+        {
+            if (settings.ESP.Player)
+                playerESP.Draw();
         }
     }
 }

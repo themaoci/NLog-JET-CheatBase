@@ -1,9 +1,9 @@
 ﻿using NLog.Targets;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase
+namespace Cheat.Base
 {
-	[Target("NLog.CheatBase")]
+	[Target("Cheat.Base")]
 	public sealed class Target : TargetWithLayout
 	{
 		public Target()
@@ -15,7 +15,7 @@ namespace NLog_Example_CheatBase
 	{
 		public static Instance Load()
 		{
-			GameObject result = new GameObject("NLog-CheatBase");
+			GameObject result = new GameObject("NLog_Cheat_Base");
 			Instance returnValue = result.AddComponent<Instance>();
 			Object.DontDestroyOnLoad(result);
 			return returnValue;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLog_Example_CheatBase
+namespace Cheat.Base
 {
     public class Settings
     {
@@ -15,6 +15,13 @@ namespace NLog_Example_CheatBase
             public bool Extract;
             public bool Container;
         }
+        public bool freecam;
+        public bool fc_fwd;
+        public bool fc_bwd;
+        public bool fc_left;
+        public bool fc_right;
+        public bool fc_up;
+        public bool fc_down;
 
     }
 }

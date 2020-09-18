@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Tools
+namespace Cheat.Base.Tools
 {
     class DrawSystem
     {

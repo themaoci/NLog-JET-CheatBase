@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NLog_Example_CheatBase</RootNamespace>
-    <AssemblyName>NLog-Example-CheatBase</AssemblyName>
+    <AssemblyName>NLog.Cheat.Base</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\FreeCam.cs" />
     <Compile Include="Features\PlayerESP.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Tools\DrawSystem.cs" />

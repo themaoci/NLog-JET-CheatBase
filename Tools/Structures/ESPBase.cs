@@ -1,8 +1,9 @@
 ﻿using EFT;
 using EFT.Interactive;
+using System;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Tools.Structures
+namespace Cheat.Base.Tools.Structures
 {
     public enum TypeOf { 
         Player,
@@ -71,18 +72,26 @@ namespace NLog_Example_CheatBase.Tools.Structures
                         break;
                 }
                 _pos.y = Screen.height - _pos.y;
-                return Vector3.zero;
+                return _pos;
             }
         }
         public string Name {
             get 
             {
-                switch (_typeOf) 
+                try {
+                    switch (_typeOf) 
+                    {
+                        case TypeOf.Player:
+                            if (_playerData.Profile != null)
+                                return _playerData.Profile.Info.Nickname;
+                            else return "fucklol";
+                        case TypeOf.Item: 
+                            return _itemData.Name.Localized();
+                    }
+                }
+                catch (NullReferenceException e)
                 {
-                    case TypeOf.Player: 
-                        return _playerData.Profile.Info.Nickname;
-                    case TypeOf.Item: 
-                        return _itemData.Name.Localized();
+                    Debug.LogError(e);
                 }
                 return "~";
             }

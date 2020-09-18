@@ -7,14 +7,12 @@ using EFT;
 using EFT.Interactive;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Tools
+namespace Cheat.Base.Tools
 {
     public class LocalGameWorld
     {
         static Camera _mainCamera;
-        GameWorld _gameWorld = null;
-        bool _gameWorldLoaded = false;
-
+        public static Camera BackupMainCamera;
         public static Camera MainCamera {
             get
             {
@@ -30,21 +28,21 @@ namespace NLog_Example_CheatBase.Tools
         public bool gameWorldLoaded {
             get 
             {
-                return _gameWorldLoaded;
+                return gameWorld != null;
             }
         }
         public GameWorld gameWorld {
             get 
             {
-                _gameWorld = Comfort.Common.Singleton<GameWorld>.Instance; // possibility of throwing errors null object
-                _gameWorldLoaded = _gameWorld != null;
-                return _gameWorld;
+                if(Comfort.Common.Singleton<EFT.GameWorld>.Instantiated)
+                    return Comfort.Common.Singleton<EFT.GameWorld>.Instance;
+                return null;
             }
         }
         public List<Player> PlayersList {
             get 
             {
-                if (_gameWorldLoaded)
+                if (gameWorldLoaded)
                     return gameWorld.RegisteredPlayers;
                 return null;
             }
