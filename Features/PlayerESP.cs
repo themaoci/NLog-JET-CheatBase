@@ -16,10 +16,10 @@ namespace NLog_Example_CheatBase.Features
         private static List<ESPBase<Player>> _TplayerList;
         private Player tpo; // temporal player object;
         private ESPBase<Player> _tpo; // temporal player helper object;
-        public void UpdatePlayers(List<Player> players) 
+        public void Update() 
         {
             // we gonna use enumerators cause they leave less trash behind
-            var e = players.GetEnumerator();
+            var e = Instance.gameWorld.PlayersList.GetEnumerator();
             _TplayerList.Clear();
             while (e.MoveNext()) 
             {

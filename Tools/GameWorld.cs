@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace NLog_Example_CheatBase.Tools
 {
-    class LocalGameWorld
+    public class LocalGameWorld
     {
         static Camera _mainCamera;
         GameWorld _gameWorld = null;

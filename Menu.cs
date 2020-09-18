@@ -22,6 +22,7 @@ namespace NLog_Example_CheatBase
             switch (id) {
                 case 0: 
                     DrawSystem.Menu.Label("-= BaseMenu =-", true);
+                    DrawSystem.Menu.Checkbox("Player ESP", ref Instance.settings.ESP.Player);
                     break;
                 default: break;
             }
