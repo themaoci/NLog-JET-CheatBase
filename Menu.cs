@@ -16,7 +16,7 @@ namespace NLog_Example_CheatBase
         Rect _menu;
         private void OnGUI() {
             //drawing happends here
-            _menu = GUILayout.Window(0, _menu, MenuDrawer, SetGuiContent("Help Menu"));
+            _menu = GUILayout.Window(0, _menu, MenuDrawer, SetGuiContent("Menu"));
         }
         private static void MenuDrawer(int id) {
             switch (id) {
