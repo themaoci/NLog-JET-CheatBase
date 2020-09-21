@@ -13,10 +13,10 @@ namespace Cheat.Base.Features
     class PlayerESP
     {
         // such a stupid mistake ...
-        private static List<ESPBase<Player>> playerList = new List<ESPBase<Player>>();
-        private static List<ESPBase<Player>> _TplayerList = new List<ESPBase<Player>>();
+        private static List<PlayerStruct> playerList = new List<PlayerStruct>();
+        private static List<PlayerStruct> _TplayerList = new List<PlayerStruct>();
         private Player tpo; // temporal player object;
-        private ESPBase<Player> _tpo; // temporal player helper object;
+        private PlayerStruct _tpo; // temporal player helper object;
         public void Update() 
         {
             if (!Instance.gameWorld.gameWorldLoaded) return;
@@ -27,13 +27,15 @@ namespace Cheat.Base.Features
             while (e.MoveNext()) 
             {
                 tpo = e.Current;
-                _tpo = new ESPBase<Player>(tpo);
+                _tpo = new PlayerStruct(tpo);
                 _TplayerList.Add(_tpo);
             }
             playerList = _TplayerList;
         }
         private Vector2 vec2tt = new Vector2(100f, 15f);
         private GUIStyle guiStyle = new GUIStyle() { normal = { textColor = Color.red }, fontSize = 12 };
+        private string _text;
+        private Vector2 _size;
         public void Draw() 
         {
             if (!Instance.gameWorld.gameWorldLoaded) return;
@@ -44,13 +46,14 @@ namespace Cheat.Base.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
-                DrawSystem.Dot.Draw(curr.Position_2D, Color.yellow, 2f);
-                string text = $"{curr.Name}";
-                float width = GUI.skin.GetStyle(text).CalcSize(GuiText(text)).x;
-                DrawSystem.Special.DrawText(text, curr.Position_2D.x - width/2, curr.Position_2D.y - 20f, vec2tt, guiStyle, Color.red);
-                text = $"{curr.Distance}m";
-                width = GUI.skin.GetStyle(text).CalcSize(GuiText(text)).x;
-                DrawSystem.Special.DrawText(text, curr.Position_2D.x - width / 2, curr.Position_2D.y, vec2tt, guiStyle, Color.red);
+                //DrawSystem.Dot.Draw(curr.Position_onScreen, Color.yellow, 2f);
+                _text = $"{curr.ItemInHands}";
+                _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
+                DrawSystem.Special.DrawText(_text, curr.Position_onScreen.x - _size.x/2, curr.Position_onScreen.y - 40f - _size.y, vec2tt, guiStyle, Color.red);
+
+                _text = $"{curr.Distance} {curr.HealthPercent}";
+                _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
+                DrawSystem.Special.DrawText(_text, curr.Position_onScreen.x - _size.x/2, curr.Position_onScreen.y - 40f - _size.y - _size.y, vec2tt, guiStyle, Color.red);
             }
         }
         private static GUIContent tempGuiContent = new GUIContent();

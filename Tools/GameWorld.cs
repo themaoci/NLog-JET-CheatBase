@@ -39,7 +39,7 @@ namespace Cheat.Base.Tools
                 return null;
             }
         }
-        public List<Player> PlayersList {
+        public List<EFT.Player> PlayersList {
             get 
             {
                 if (gameWorldLoaded)
