@@ -12,14 +12,29 @@ namespace Cheat.Base
 {
     class Menu : MonoBehaviour
     {
-        FreeCam fC = new FreeCam();
         private void Awake() {
             Debug.LogError(Instance.watermark + " Loaded: Menu");
         }
         Rect _menu = new Rect(10f,10f,220f,200f);
+        #region Temporal Private Variables
+        private FreeCam fC = new FreeCam();
+        private static float _cameraSpeed = 1f;
+        private static float _moveSpeed = 1f;
+        private static bool _lockPlayer = false;
         private bool _displayMenu = false;
+        #endregion
         void Update() 
         {
+            if (Input.GetKeyDown(KeyCode.Insert)) {
+                _displayMenu = !_displayMenu;
+            }
+            //Below GameWorldLoaded Sensitive Data
+            if (!Instance.gameWorld.gameWorldLoaded) return;
+
+            if (Input.GetKeyDown(KeyCode.F10))
+            {
+                fC.TeleportPlayerToCamera();
+            }
             if (Instance.settings.freecam)
             {
                 fC.Enable();
@@ -30,6 +45,7 @@ namespace Cheat.Base
             }
             if (fC.Enabled)
             {
+                
                 fC.CameraSpeed = _cameraSpeed;
                 fC.MoveSpeed = _moveSpeed;
                 fC.LockPlayer = _lockPlayer;
@@ -37,21 +53,17 @@ namespace Cheat.Base
                 fC.Move();
                 fC.MouseMove();
             }
-            if (Input.GetKeyDown(KeyCode.F10)) 
-            {
-                fC.TeleportPlayerToCamera();
-            }
-            if (Input.GetKeyDown(KeyCode.Insert)) {
-                _displayMenu = !_displayMenu;
-            }
         }
         private void OnGUI() {
             //drawing happends here
-            _menu = GUILayout.Window(0, _menu, MenuDrawer, SetGuiContent("Menu"));
+            if (_displayMenu)
+            {
+                GUI_MainMenu();
+            }
         }
-        private static float _cameraSpeed = 1f;
-        private static float _moveSpeed = 1f;
-        private static bool _lockPlayer = false;
+        void GUI_MainMenu() {
+            _menu = GUILayout.Window(0, _menu, MenuDrawer, SetGuiContent(Instance.watermark + " Menu"));
+        }
         private void MenuDrawer(int id) {
             switch (id) {
                 case 0:

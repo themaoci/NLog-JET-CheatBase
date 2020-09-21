@@ -2,15 +2,15 @@
 using EFT;
 using System.Reflection;
 using UnityEngine;
-
+using System.Timers;
 
 namespace Cheat.Base.Features
 {
     class FreeCam
     {
-        LocalGameWorld gameWorld = new LocalGameWorld();
-        bool enabled;
-        Player _player;
+        private LocalGameWorld gameWorld = new LocalGameWorld();
+        private bool enabled;
+        private Player _player;
         private float _cameraSpeed;
 
         public float CameraSpeed {
@@ -83,19 +83,26 @@ namespace Cheat.Base.Features
             {
                 _player.MovementContext.IsGrounded = true;
                 _player.MovementContext.FreefallTime = 0f;
-                //_player.MovementContext.FallSa = 0f;
-                /*object FieldValue = _player.HealthController.GetType().BaseType
-                    .GetField("dictionary_0", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(_player.HealthController);*/
-                //Dictionary<EBodyPart, GClass1262.BodyPartState>
-                //_player.HealthController.GetBodyPartHealth(EBodyPart.Common).Current
-                //_player.MovementContext.VerticalSpeed.
+                _player.Physical.FallDamageMultiplier = 0f;
                 _player.Transform.position = Camera.main.transform.position - Camera.main.transform.forward * 0.2f;
             }
+            else 
+            {
+                _player.Physical.FallDamageMultiplier = 1f;
+            }
         }
+        Timer teleportPlayerDelayExecution = new Timer();
         public void TeleportPlayerToCamera()
         {
+            _player.Physical.FallDamageMultiplier = 0f;
             _player.Transform.position = Camera.main.transform.position;
+            teleportPlayerDelayExecution.Interval = 1000;
+            teleportPlayerDelayExecution.AutoReset = false;
+            teleportPlayerDelayExecution.Elapsed += new ElapsedEventHandler(TimedReverseFallDamage);
+            teleportPlayerDelayExecution.Start();
+        }
+        private void TimedReverseFallDamage(object sender, ElapsedEventArgs e) {
+            _player.Physical.FallDamageMultiplier = 1f;
         }
         public void MouseMove() 
         {
