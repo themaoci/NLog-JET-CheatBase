@@ -22,14 +22,17 @@ namespace Cheat.Base.Features
             if (!Instance.gameWorld.gameWorldLoaded) return;
             if (Instance.gameWorld.PlayersList.Count <= 0) return;
             // we gonna use enumerators cause they leave less trash behind
-            var e = Instance.gameWorld.PlayersList.GetEnumerator();
+            //var e = Instance.gameWorld.PlayersList.GetEnumerator();
             _TplayerList.Clear();
-            while (e.MoveNext()) 
+
+            // maybe this will speedup after i will make a proper data collection
+            Parallel.For(0, Instance.gameWorld.PlayersList.Count, Instance.maxThreadOptions, i =>
             {
-                tpo = e.Current;
+                tpo = Instance.gameWorld.PlayersList[i];
                 _tpo = new PlayerStruct(tpo);
                 _TplayerList.Add(_tpo);
-            }
+            });
+
             playerList = _TplayerList;
         }
         private Vector2 vec2tt = new Vector2(100f, 15f);
@@ -38,7 +41,6 @@ namespace Cheat.Base.Features
         private Vector2 _size;
         public void Draw() 
         {
-            if (!Instance.gameWorld.gameWorldLoaded) return;
             if (playerList == null) return;
             if (playerList.Count <= 0) return;
 
@@ -46,14 +48,14 @@ namespace Cheat.Base.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
-                //DrawSystem.Dot.Draw(curr.Position_onScreen, Color.yellow, 2f);
+                //DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f);
                 _text = $"{curr.ItemInHands}";
                 _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
-                DrawSystem.Special.DrawText(_text, curr.Position_onScreen.x - _size.x/2, curr.Position_onScreen.y - 40f - _size.y, vec2tt, guiStyle, Color.red);
+                DrawSystem.Special.DrawText(_text, curr.HeadPosition.x - _size.x/2, curr.HeadPosition.y - 40f - _size.y, vec2tt, guiStyle, Color.red);
 
                 _text = $"{curr.Distance} {curr.HealthPercent}";
                 _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
-                DrawSystem.Special.DrawText(_text, curr.Position_onScreen.x - _size.x/2, curr.Position_onScreen.y - 40f - _size.y - _size.y, vec2tt, guiStyle, Color.red);
+                DrawSystem.Special.DrawText(_text, curr.HeadPosition.x - _size.x/2, curr.HeadPosition.y - 40f - _size.y - _size.y, vec2tt, guiStyle, Color.red);
             }
         }
         private static GUIContent tempGuiContent = new GUIContent();

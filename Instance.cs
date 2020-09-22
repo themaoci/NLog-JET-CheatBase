@@ -12,6 +12,7 @@ namespace Cheat.Base
     public class Instance : MonoBehaviour
     {
         //global scope access
+        public static ParallelOptions maxThreadOptions = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount };
         public static string watermark = "[MAO]";
         public static LocalGameWorld gameWorld = new LocalGameWorld();
         public static Settings settings = new Settings();
@@ -31,6 +32,8 @@ namespace Cheat.Base
         }
         private void OnGUI() 
         {
+            if (!Instance.gameWorld.gameWorldLoaded) return;
+
             if (settings.ESP.Player)
                 playerESP.Draw();
         }

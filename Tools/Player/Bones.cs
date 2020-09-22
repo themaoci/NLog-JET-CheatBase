@@ -68,7 +68,7 @@ namespace Cheat.Base.Tools.Player
 
         public static List<Vector3> GetPlayerBonePositions(EFT.Player player) 
         {
-            var bones = Enum.GetValues(typeof(PlayerSkeletor)).Cast<int>();
+            IEnumerable<int> bones = Enum.GetValues(typeof(PlayerSkeletor)).Cast<int>();
             List<Vector3> boneReturn = new List<Vector3>();
             IEnumerator<int> e = bones.GetEnumerator();
             while(e.MoveNext())
@@ -77,41 +77,20 @@ namespace Cheat.Base.Tools.Player
             }
             return boneReturn;
         }
-
+        private static Vector3 _tempBonePos;
         public static List<Vector3> GetPlayerBonePositions_inW2S(EFT.Player player) {
             List<Vector3> bones = GetPlayerBonePositions(player);
-            var e = bones;
             List<Vector3> toReturn = new List<Vector3>();
             for (int i = 0; i < bones.Count; i++) {
-                toReturn.Add(LocalGameWorld.MainCamera.WorldToScreenPoint(bones[i]));
+                _tempBonePos = LocalGameWorld.MainCamera.WorldToScreenPoint(bones[i]);
+                _tempBonePos.y = Screen.height - _tempBonePos.y;
+                toReturn.Add(_tempBonePos);
             }
             return toReturn;
         }
-        /*
-        public static Vector3 FinalVector(Diz.Skinning.Skeleton skeletor, int BoneId)
-        {
-            try
-            {
-                return skeletor.Bones.ElementAt(BoneId).Value.position;
-            }
-            catch 
-            {
-                return Vector3.zero;
-            }
-        }
-        */
-        /* for debugging only
-        public static string BoneName(Diz.Skinning.Skeleton sko, int id)
-        {
-            return sko.Bones.ElementAt(id).Key.ToString();
-        }*/
         private static Vector3 GetBoneById(EFT.Player player, int BoneId)
         {
             return player.PlayerBody.SkeletonRootJoint.Bones.ElementAt(BoneId).Value.position; // sometimes throw an error...
         }
-        /*public static Vector3 GetBoneById(EFT.Player player, BodyPart BoneId)
-        {
-            return player.PlayerBody.SkeletonRootJoint.Bones.ElementAt((int)BoneId).Value.position; // additional override not used now
-        }*/
     }
 }
