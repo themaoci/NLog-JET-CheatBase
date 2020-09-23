@@ -5,6 +5,19 @@ namespace Cheat.Base.Tools
 {
     class DrawSystem
     {
+        public class Calc {
+
+            public static Vector2 TextSize(string text) {
+
+                return GUI.skin.GetStyle(text).CalcSize(_GuiText(text));
+            }
+            private static GUIContent _tempGuiContent = new GUIContent();
+            private static GUIContent _GuiText(string text)
+            {
+                _tempGuiContent.text = text;
+                return _tempGuiContent;
+            }
+        }
         public class Menu
         {
             private static GUIStyle baseStyle = new GUIStyle();
@@ -106,6 +119,22 @@ namespace Cheat.Base.Tools
                 d.vectorA.x = size.width;
                 d.vectorA.y = size.height;
                 DrawText(text, size.x, size.y, d.vectorA, style, style.normal.textColor);
+            }
+            public static void DrawText(string text, float axis_x, float axis_y, Vector2 size, GUIStyle styleOfText)
+            {
+                d.rectA.x = axis_x;
+                d.rectA.y = axis_y;
+                d.rectA.width = size.x;
+                d.rectA.height = size.y;
+                d.tGUIContent.text = text;
+                Text.DrawShadowed(
+                    d.rectA,
+                    d.tGUIContent,
+                    styleOfText,
+                    styleOfText.normal.textColor,
+                    dColors.Black,
+                    d.vector1x1
+                );
             }
             public static void DrawText(string text, float axis_x, float axis_y, Vector2 size, GUIStyle styleOfText, Color front_color)
             {

@@ -39,6 +39,7 @@ namespace Cheat.Base.Tools
                 return null;
             }
         }
+        public List<LootItem> LootList;
         public List<EFT.Player> PlayersList {
             get 
             {
@@ -54,11 +55,28 @@ namespace Cheat.Base.Tools
                 return gameWorld.LootItems.GetValuesEnumerator().GetEnumerator();
             }
         }
+        /* 
+        this list is fucking retarded you need to use this retarded Enumerator which cannot be transfered to list to improve performance ...
+        i will need to make new thread jsut to transform it from Enumerator into List<LootItem> so i will be able to use it in Parallel loops
+        public GClass365<int, LootItem> LootItems_Base
+        {
+            get
+            {
+                return gameWorld.LootItems;
+            }
+        }*/
         public List<Throwable>.Enumerator Grenades
         {
             get
             {
                 return gameWorld.Grenades.GetValuesEnumerator().GetEnumerator();
+            }
+        }
+        public GClass365<int, Throwable> GrenadesBase
+        {
+            get
+            {
+                return gameWorld.Grenades;
             }
         }
         public List<ExfiltrationPoint> ExfiltrationPoints

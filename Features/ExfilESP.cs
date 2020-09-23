@@ -11,23 +11,33 @@ using UnityEngine;
 
 namespace NLog_Example_CheatBase.Features
 {
-    class CorpseESP
+    class ExfilESP
     {
-        //public static Type Corpse = new Corpse().GetType();
-        //public static Type ObserverCorpse = new ObservedCorpse().GetType();
-        private List<CorpseStruct> corpseList = new List<CorpseStruct>();
-        private List<CorpseStruct> _corpseList = new List<CorpseStruct>();
-        private List<LootItem> _LootItemList;
-        public void Update() {
-            _LootItemList = Instance.gameWorld.LootList;
-            _corpseList.Clear();
-            Parallel.For(0, _LootItemList.Count, Instance.maxThreadOptions, i =>
+        private List<ExfiltrationStruct> exfilList = new List<ExfiltrationStruct>();
+        private List<ExfiltrationStruct> _exfilList = new List<ExfiltrationStruct>();
+        private List<ScavExfiltrationPoint> _exfilsScav;
+        private List<ExfiltrationPoint> _exfilsPmc;
+        public void Update()
+        {
+            _exfilsScav = Instance.gameWorld.ScavExfiltrationPoints;
+            _exfilsPmc = Instance.gameWorld.ExfiltrationPoints;
+            _exfilList.Clear();
+            if (_exfilsScav.Count > 0)
             {
-                var corpse = _LootItemList[i];
-                if (corpse is Corpse/* || e is ObservedCorpse*/)//observer is online only
-                    _corpseList.Add(new CorpseStruct(corpse));
-            });
-            corpseList = _corpseList;
+                Parallel.For(0, _exfilsScav.Count, Instance.maxThreadOptions, i =>
+                {
+                    _exfilList.Add(new ExfiltrationStruct(_exfilsScav[i]));
+                });
+            }
+            if (_exfilsPmc.Count > 0)
+            {
+                Parallel.For(0, _exfilsPmc.Count, Instance.maxThreadOptions, i =>
+                {
+                    _exfilList.Add(new ExfiltrationStruct(_exfilsPmc[i]));
+                });
+            }
+            exfilList = _exfilList;
+            
         }
         private string _text;
         private Vector2 _size;
@@ -35,10 +45,10 @@ namespace NLog_Example_CheatBase.Features
         private GUIStyle guiStyle = new GUIStyle() { normal = { textColor = new Color(1f, 1f, 1f, .8f) }, fontSize = 12 };
         public void Draw()
         {
-            if (corpseList == null) return;
-            if (corpseList.Count <= 0) return;
+            if (exfilList == null) return;
+            if (exfilList.Count <= 0) return;
 
-            var e = corpseList.GetEnumerator();
+            var e = exfilList.GetEnumerator();
             while (e.MoveNext())
             {
                 var curr = e.Current;

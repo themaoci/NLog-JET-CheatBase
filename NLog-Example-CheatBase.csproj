@@ -49,9 +49,8 @@
     <Reference Include="NLog">
       <HintPath>shared\libraries\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="PlayerEnums, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\JET-Binaries\JET-Binaries\Shared\References\PlayerEnums.dll</HintPath>
+    <Reference Include="PlayerEnums">
+      <HintPath>shared\libraries\PlayerEnums.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,18 +77,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\CorpseESP.cs" />
+    <Compile Include="Features\ExfilESP.cs" />
     <Compile Include="Features\FreeCam.cs" />
+    <Compile Include="Features\ItemESP.cs" />
     <Compile Include="Features\PlayerESP.cs" />
+    <Compile Include="Features\ThrowableESP.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Tools\DrawSystem.cs" />
     <Compile Include="Tools\GameWorld.cs" />
     <Compile Include="Tools\Player\Bones.cs" />
+    <Compile Include="Tools\Structures\CorpseStruct.cs" />
     <Compile Include="Tools\Structures\ESPBase.cs" />
     <Compile Include="Instance.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="NLogHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Structures\ExfiltrationStruct.cs" />
+    <Compile Include="Tools\Structures\ItemStruct.cs" />
     <Compile Include="Tools\Structures\PlayerStruct.cs" />
+    <Compile Include="Tools\Structures\ThrowableStruct.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

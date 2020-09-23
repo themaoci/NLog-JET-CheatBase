@@ -17,7 +17,6 @@ namespace NLog_Example_CheatBase.Tools.Structures
             _objectName = _GenerateObjectName(_throwable.name);// _corpse.Item.ShortName.Localized();
             _positionBase = LocalGameWorld.W2S(_throwable.transform.position);
             _distance = (int)Vector3.Distance(LocalGameWorld.MainCamera.transform.position, _throwable.transform.position);
-
         }
 
         private string _GenerateObjectName(string objectUnityName) {

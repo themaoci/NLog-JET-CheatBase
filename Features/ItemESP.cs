@@ -1,4 +1,5 @@
 ﻿using Cheat.Base;
+using Cheat.Base.Tools;
 using EFT.Interactive;
 using NLog_Example_CheatBase.Tools.Structures;
 using System;
@@ -15,24 +16,39 @@ namespace NLog_Example_CheatBase.Features
         private List<ItemStruct> _itemList = new List<ItemStruct>();
         private List<LootItem>.Enumerator _enumLootItemList;
         private List<LootItem> _LootItemList;
-
         public void Update()
         {
-            _enumLootItemList = Instance.gameWorld.LootItems;
+            _LootItemList = Instance.gameWorld.LootList;
             _itemList.Clear();
-            _LootItemList.Clear();
-            
-            while (_enumLootItemList.MoveNext())
-            { // this shouldnt be that slow - somehow we need to convert this fast from enumerator to list...
-                _LootItemList.Add(_enumLootItemList.Current);
-            }
-            // parallel threading cause this oen below should be intensive for game loop cause of alot of items
-            Parallel.ForEach(_LootItemList, item => {
-                if(item is LootItem/* || item is ObservedLootItem*/)// observer is online only
+            Parallel.For(0, _LootItemList.Count, Instance.maxThreadOptions, i =>
+            {
+                var item = _LootItemList[i];
+                if (item is LootItem/* || item is ObservedLootItem*/)// observer is online only
                     _itemList.Add(new ItemStruct(item));
             });
             itemList = _itemList;
         }
-        public void Draw() { }
+        private string _text;
+        private Vector2 _size;
+        private Vector2 vec2tt = new Vector2(100f, 15f);//yes this is lazy but working so will leave it here
+        private GUIStyle guiStyle = new GUIStyle() { normal = { textColor = new Color(1f, 1f, 1f, .8f) }, fontSize = 12 };
+        public void Draw() {
+            if (itemList == null) return;
+            if (itemList.Count <= 0) return;
+
+            var e = itemList.GetEnumerator();
+            while (e.MoveNext())
+            {
+                var curr = e.Current;
+                //DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f);
+                _text = $"{curr.Name}";
+                _size = DrawSystem.Calc.TextSize(_text);
+                DrawSystem.Special.DrawText(_text, curr.Position.x - _size.x / 2, curr.Position.y - 40f - _size.y, vec2tt, guiStyle);
+
+                _text = $"{curr.Distance}";
+                _size = DrawSystem.Calc.TextSize(_text);
+                DrawSystem.Special.DrawText(_text, curr.Position.x - _size.x / 2, curr.Position.y - 40f - _size.y - _size.y, vec2tt, guiStyle);
+            }
+        }
     }
 }

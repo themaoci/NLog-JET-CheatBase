@@ -12,11 +12,10 @@ namespace Cheat.Base.Features
 {
     class PlayerESP
     {
-        // such a stupid mistake ...
         private static List<PlayerStruct> playerList = new List<PlayerStruct>();
         private static List<PlayerStruct> _TplayerList = new List<PlayerStruct>();
         private Player tpo; // temporal player object;
-        private PlayerStruct _tpo; // temporal player helper object;
+        private PlayerStruct _tpo; // temporal player struct object;
         public void Update() 
         {
             if (!Instance.gameWorld.gameWorldLoaded) return;
@@ -35,7 +34,7 @@ namespace Cheat.Base.Features
 
             playerList = _TplayerList;
         }
-        private Vector2 vec2tt = new Vector2(100f, 15f);
+        private Vector2 vec2tt = new Vector2(100f, 15f);//yes this is lazy but working so will leave it here
         private GUIStyle guiStyle = new GUIStyle() { normal = { textColor = Color.red }, fontSize = 12 };
         private string _text;
         private Vector2 _size;
@@ -48,21 +47,15 @@ namespace Cheat.Base.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
-                //DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f);
+                // DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f); // if you need a dot for head position ;)
                 _text = $"{curr.ItemInHands}";
-                _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
+                _size = DrawSystem.Calc.TextSize(_text);
                 DrawSystem.Special.DrawText(_text, curr.HeadPosition.x - _size.x/2, curr.HeadPosition.y - 40f - _size.y, vec2tt, guiStyle, Color.red);
 
                 _text = $"{curr.Distance} {curr.HealthPercent}";
-                _size = GUI.skin.GetStyle(_text).CalcSize(GuiText(_text));
+                _size = DrawSystem.Calc.TextSize(_text);
                 DrawSystem.Special.DrawText(_text, curr.HeadPosition.x - _size.x/2, curr.HeadPosition.y - 40f - _size.y - _size.y, vec2tt, guiStyle, Color.red);
             }
-        }
-        private static GUIContent tempGuiContent = new GUIContent();
-        public static GUIContent GuiText(string text)
-        {
-            tempGuiContent.text = text;
-            return tempGuiContent;
         }
     }
 }
