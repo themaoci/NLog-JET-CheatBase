@@ -39,12 +39,6 @@ namespace Cheat.Base.Tools.Structures
         private List<Vector3> _bonePositions;
         private Vector3 _positionHead;
 
-        private void _drawBoneConnection(Vector3 bone_1, Vector3 bone_2)
-        {
-            //later add settings for colors and thiccness
-            DrawSystem.Bone.Draw(bone_1, bone_2, Color.white, 1f);
-        }
-
         public string Health
         {
             get
@@ -65,21 +59,7 @@ namespace Cheat.Base.Tools.Structures
                 return $"{_itemInHands}";
             }
         }
-        public Vector3 DrawBones()
-        {
-            // Lame bone connection drawing :>
-            _drawBoneConnection(_bonePositions[1], _bonePositions[2]);   // 1- Neck, 2- Pelvis
-            _drawBoneConnection(_bonePositions[5], _bonePositions[6]);   // 5- L Upperarm, 6- L Forearm
-            _drawBoneConnection(_bonePositions[10], _bonePositions[11]); // 10- R Upperarm, 11- R Forearm
-            _drawBoneConnection(_bonePositions[6], _bonePositions[7]);   // 6- L Forearm, 7- L Palm
-            _drawBoneConnection(_bonePositions[11], _bonePositions[12]); // 11- R Forearm, 12- R Palm
-            _drawBoneConnection(_bonePositions[10], _bonePositions[5]);  // 10- R Upperarm, 5- L Upperarm
-            _drawBoneConnection(_bonePositions[3], _bonePositions[2]);   // 3- L Calf, 2- Pelvis
-            _drawBoneConnection(_bonePositions[8], _bonePositions[2]);   // 8- R Calf, 2- Pelvis
-            _drawBoneConnection(_bonePositions[3], _bonePositions[4]);   // 3- L Calf, 4- L Foot
-            _drawBoneConnection(_bonePositions[8], _bonePositions[9]);   // 8- R Calf, 9- R Foot
-            return Vector3.zero;
-        }
+
         public Vector3 HeadPosition
         {
             get

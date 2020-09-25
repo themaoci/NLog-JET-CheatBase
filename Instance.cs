@@ -23,7 +23,7 @@ namespace Cheat.Base
         public static Thread updateLootList_Thread;
         private void Start()
         {
-            Debug.LogError("Instance Started.");
+            Debug.LogError(watermark + " Instance Started.");
             gameObject.AddComponent<Menu>(); // adding menu component
             //start thread for Loot Conversion
             updateLootList_Thread = new Thread(new ThreadStart(UpdateLootToBeLessRetarded));
