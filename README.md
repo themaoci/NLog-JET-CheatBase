@@ -11,7 +11,7 @@ NLog.dll.nlog (only for cheatfile)
     	</targets>
     </nlog>
 ```
-NLog.dll.nlog (for emutarkov) - just add this line below other <target> inside <targets> section
+NLog.dll.nlog (for emutarkov) - just add this line below other `<target>` inside `<targets>` section
 ```
 <target name="Cheat.Base" xsi:type="Cheat.Base" />
 ```
