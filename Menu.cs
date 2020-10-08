@@ -15,13 +15,15 @@ namespace Cheat.Base
         private void Awake() {
             Debug.LogError(Instance.watermark + " Loaded: Menu");
         }
-        Rect _menu = new Rect(10f,10f,220f,200f);
+        Rect _menu = new Rect(10f, 10f, 220f, 200f);
+        Rect _LocalPpos = new Rect(10f, 5f, 220f, 20f);
         #region Temporal Private Variables
         private FreeCam fC = new FreeCam();
         private static float _cameraSpeed = 1f;
         private static float _moveSpeed = 1f;
         private static bool _lockPlayer = false;
         private bool _displayMenu = false;
+        private bool _drawPosition = false;
         #endregion
         void Update() 
         {
@@ -60,6 +62,11 @@ namespace Cheat.Base
             {
                 GUI_MainMenu();
             }
+            if (_drawPosition) 
+            {
+                if(Instance.gameWorld.LocalPlayer != null)
+                    GUI.Label(_LocalPpos, Instance.gameWorld.LocalPlayer.Transform.position.ToString());
+            }
         }
         void GUI_MainMenu() {
             _menu = GUILayout.Window(0, _menu, MenuDrawer, SetGuiContent(Instance.watermark + " Menu"));
@@ -72,7 +79,8 @@ namespace Cheat.Base
                     //DrawSystem.Menu.Label("Loaded: " + Instance.gameWorld.gameWorldLoaded);
                     DrawSystem.Menu.Label("Scene: " + SceneManager.GetActiveScene().name);
                     if(Instance.gameWorld.PlayersList != null)
-                        DrawSystem.Menu.Label("PlayerCount: " + (Instance.gameWorld.PlayersList.Count).ToString());
+                        DrawSystem.Menu.Label("PlayerCount: " + (Instance.gameWorld.PlayersList.Count).ToString()); 
+                    DrawSystem.Menu.Checkbox("Show LocalPl. Pos.", ref _drawPosition);
                     DrawSystem.Menu.Checkbox("Player ESP", ref Instance.settings.ESP.Player);
                     DrawSystem.Menu.Checkbox("FreeCamera", ref Instance.settings.freecam);
                     DrawSystem.Menu.Checkbox("LockPlayerToCamera", ref _lockPlayer);

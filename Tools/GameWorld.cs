@@ -72,6 +72,25 @@ namespace Cheat.Base.Tools
                 return gameWorld.Grenades.GetValuesEnumerator().GetEnumerator();
             }
         }
+        private EFT.Player _localplayer;
+        public EFT.Player LocalPlayer {
+            get {
+                if (!gameWorldLoaded)
+                {
+                    _localplayer = null;
+                    return null;
+                }
+                // this variable need to be override after going to new scene/map
+                if (_localplayer == null)
+                {
+                    List<EFT.Player> tmpList = PlayersList;
+                    tmpList = tmpList.OrderBy(tempPlayer => Vector3.Distance(MainCamera.transform.position, tempPlayer.Transform.position)).ToList();
+                    _localplayer = tmpList.FirstOrDefault();
+                }
+                return _localplayer;
+            }
+            set { _localplayer = value; }
+        }
         public GClass365<int, Throwable> GrenadesBase
         {
             get

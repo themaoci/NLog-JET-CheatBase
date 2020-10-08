@@ -15,3 +15,6 @@ NLog.dll.nlog (for emutarkov) - just add this line below other `<target>` inside
 ```
 <target name="Cheat.Base" xsi:type="Cheat.Base" />
 ```
+
+If you want to talk with me, you can find me at this discord server.
+https://discord.gg/T66tGKa
