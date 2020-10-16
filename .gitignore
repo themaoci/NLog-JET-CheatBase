@@ -1,5 +1,9 @@
 # created By TheMaoci. Ignoring Auto Created Files.
 shared/libraries/
 obj/Debug/
+obj/Release/
 .vs/
 bin/Debug/
+bin/Release/
+bin
+obj

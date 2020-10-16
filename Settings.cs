@@ -4,22 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cheat.Base
+namespace NLog_CheatBase
 {
     public class Settings
     {
         public _ESP ESP = new _ESP();
         public _Distances Distances = new _Distances();
         public class _ESP {
-            public bool Player;
-            public bool Item;
+            public bool Corpse;
             public bool Extract;
+            public bool Item;
+            public bool Player;
+            public bool Throwable;
             public bool Container;
         }
         public class _Distances {
-            public int Player = 500;
-            public int Item = 500;
+            public int Corpse = 500;
             public int Extract = 2000;
+            public int Item = 500;
+            public int Player = 500;
+            public int Throwable = 200;
             public int Container = 500;
         }
         public bool freecam;

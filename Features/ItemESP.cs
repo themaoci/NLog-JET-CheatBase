@@ -1,14 +1,16 @@
 ﻿using Cheat.Base;
-using Cheat.Base.Tools;
 using EFT.Interactive;
-using NLog_Example_CheatBase.Tools.Structures;
+using NLog_CheatBase.Tools;
+using NLog_CheatBase.Tools.Structures;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Features
+#pragma warning disable 169 // disable not assigned variable
+
+namespace NLog_CheatBase.Features
 {
     class ItemESP
     {

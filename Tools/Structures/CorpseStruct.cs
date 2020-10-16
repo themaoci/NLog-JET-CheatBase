@@ -1,10 +1,8 @@
-﻿using Cheat.Base.Tools;
-using Cheat.Base.Tools.Structures;
-using EFT.Interactive;
+﻿using EFT.Interactive;
 using UnityEngine;
 
 
-namespace NLog_Example_CheatBase.Tools.Structures
+namespace NLog_CheatBase.Tools.Structures
 {
     class CorpseStruct : ESPBase
     {

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using EFT;
 using EFT.Interactive;
-using Cheat.Base.Tools.Structures;
-using Cheat.Base.Tools;
 
-namespace NLog_Example_CheatBase.Tools.Structures
+namespace NLog_CheatBase.Tools.Structures
 {
     class ExfiltrationStruct : ESPBase
     {

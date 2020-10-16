@@ -1,14 +1,15 @@
 ﻿using EFT;
-using Cheat.Base.Tools;
-using Cheat.Base.Tools.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Cheat.Base;
+using NLog_CheatBase.Tools.Structures;
+using NLog_CheatBase.Tools;
 
-namespace Cheat.Base.Features
+namespace NLog_CheatBase.Features
 {
     class PlayerESP
     {

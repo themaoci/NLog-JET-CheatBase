@@ -1,10 +1,9 @@
-﻿using Cheat.Base.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Cheat.Base.Tools.Player
+namespace NLog_CheatBase.Tools.Player
 {
     public static class Bones
     {
@@ -70,6 +69,7 @@ namespace Cheat.Base.Tools.Player
         public static List<Vector3> GetPlayerBonePositions(EFT.Player player) 
         {
             List<Vector3> boneReturn = new List<Vector3>();
+            // well i preffer to have a static list then dynamic ...
             boneReturn.Add(GetBoneById(player, 133));
             boneReturn.Add(GetBoneById(player, 132));
             boneReturn.Add(GetBoneById(player, 14));

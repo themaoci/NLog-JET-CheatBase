@@ -1,8 +1,10 @@
 ﻿using NLog.Targets;
 using UnityEngine;
+using NLog_CheatBase;
 
 namespace Cheat.Base
 {
+	// this is a tag for nlog to load this assembly
 	[Target("Cheat.Base")]
 	public sealed class Target : TargetWithLayout
 	{

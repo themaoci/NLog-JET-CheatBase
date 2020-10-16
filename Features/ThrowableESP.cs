@@ -1,6 +1,6 @@
 ﻿using Cheat.Base;
-using Cheat.Base.Tools;
-using NLog_Example_CheatBase.Tools.Structures;
+using NLog_CheatBase.Tools;
+using NLog_CheatBase.Tools.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Features
+#pragma warning disable 649  // disable not assigned variable
+
+namespace NLog_CheatBase.Features
 {
     class ThrowableESP
     {

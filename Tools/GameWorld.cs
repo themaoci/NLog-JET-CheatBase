@@ -7,7 +7,7 @@ using EFT;
 using EFT.Interactive;
 using UnityEngine;
 
-namespace Cheat.Base.Tools
+namespace NLog_CheatBase.Tools
 {
     public class LocalGameWorld
     {
@@ -91,7 +91,7 @@ namespace Cheat.Base.Tools
             }
             set { _localplayer = value; }
         }
-        public GClass365<int, Throwable> GrenadesBase
+        public GClass436<int, Throwable> GrenadesBase
         {
             get
             {

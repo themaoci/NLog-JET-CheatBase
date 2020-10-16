@@ -1,5 +1,5 @@
-﻿using Cheat.Base.Tools;
-using Cheat.Base.Features;
+﻿using NLog_CheatBase.Features;
+using NLog_CheatBase.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Cheat.Base
+namespace NLog_CheatBase
 {
     class Menu : MonoBehaviour
     {
@@ -17,6 +17,7 @@ namespace Cheat.Base
         }
         Rect _menu = new Rect(10f, 10f, 220f, 200f);
         Rect _LocalPpos = new Rect(10f, 5f, 220f, 20f);
+
         #region Temporal Private Variables
         private FreeCam fC = new FreeCam();
         private static float _cameraSpeed = 1f;
@@ -25,6 +26,7 @@ namespace Cheat.Base
         private bool _displayMenu = false;
         private bool _drawPosition = false;
         #endregion
+
         void Update() 
         {
             if (Input.GetKeyDown(KeyCode.Insert)) {
@@ -81,7 +83,13 @@ namespace Cheat.Base
                     if(Instance.gameWorld.PlayersList != null)
                         DrawSystem.Menu.Label("PlayerCount: " + (Instance.gameWorld.PlayersList.Count).ToString()); 
                     DrawSystem.Menu.Checkbox("Show LocalPl. Pos.", ref _drawPosition);
-                    DrawSystem.Menu.Checkbox("Player ESP", ref Instance.settings.ESP.Player);
+                    DrawSystem.Menu.Label("ESP",true);
+                    DrawSystem.Menu.Checkbox("Player", ref Instance.settings.ESP.Player);
+                    DrawSystem.Menu.Checkbox("Corpse", ref Instance.settings.ESP.Corpse);
+                    DrawSystem.Menu.Checkbox("Exfil", ref Instance.settings.ESP.Extract);
+                    DrawSystem.Menu.Checkbox("Item", ref Instance.settings.ESP.Item);
+                    DrawSystem.Menu.Checkbox("Throwable", ref Instance.settings.ESP.Throwable);
+                    DrawSystem.Menu.Label("- - -", true);
                     DrawSystem.Menu.Checkbox("FreeCamera", ref Instance.settings.freecam);
                     DrawSystem.Menu.Checkbox("LockPlayerToCamera", ref _lockPlayer);
                     DrawSystem.Menu.Label("Player2Camera: F10");

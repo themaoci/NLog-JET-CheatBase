@@ -1,15 +1,14 @@
-﻿using Cheat.Base.Features;
-using Cheat.Base.Tools;
-using EFT.Interactive;
+﻿using EFT.Interactive;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using NLog_CheatBase.Features;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using NLog_CheatBase.Tools;
 
-namespace Cheat.Base
+namespace NLog_CheatBase
 {
     public class Instance : MonoBehaviour
     {
@@ -20,6 +19,11 @@ namespace Cheat.Base
         public static Settings settings = new Settings();
         //local scope access
         private PlayerESP playerESP = new PlayerESP();
+        private CorpseESP corpseESP = new CorpseESP();
+        private ExfilESP exfilESP = new ExfilESP();
+        private ItemESP itemESP = new ItemESP();
+        private ThrowableESP throwableESP = new ThrowableESP();
+
         public static Thread updateLootList_Thread;
         private void Start()
         {
@@ -32,13 +36,18 @@ namespace Cheat.Base
         }
         #region Thread #1 - LootItem List Conversion
         private void UpdateLootToBeLessRetarded() {
+            // errors happend to be in here at the start of match
             List<LootItem> _tmpList = new List<LootItem>();
             while (updateLootList_Thread.ThreadState == ThreadState.Running) {
                 if (!gameWorld.gameWorldLoaded) {
                     Thread.Sleep(1000); continue; 
                 }
+                
                 List<LootItem>.Enumerator _LootItemList = Instance.gameWorld.LootItems;
-                _tmpList.Clear();
+                if(_tmpList.Count != 0)
+                    _tmpList.Clear();
+                if (_LootItemList.Current == null) continue;
+
                 while (_LootItemList.MoveNext())
                 {
                     if(_LootItemList.Current != null)
@@ -53,14 +62,42 @@ namespace Cheat.Base
         private void Update() 
         {
             if (!Instance.gameWorld.gameWorldLoaded) return;
+
             if (settings.ESP.Player)
                 playerESP.Update();
+
+            if (settings.ESP.Corpse)
+                corpseESP.Update();
+
+            if (settings.ESP.Throwable)
+                throwableESP.Update();
+
+            if (settings.ESP.Extract)
+                exfilESP.Update();
+
+            if (settings.ESP.Item)
+                itemESP.Update();
         }
         private void OnGUI() 
         {
             if (!Instance.gameWorld.gameWorldLoaded) return;
             if (settings.ESP.Player)
                 playerESP.Draw();
+
+            if (settings.ESP.Player)
+                playerESP.Draw();
+
+            if (settings.ESP.Corpse)
+                corpseESP.Draw();
+
+            if (settings.ESP.Throwable)
+                throwableESP.Draw();
+
+            if (settings.ESP.Extract)
+                exfilESP.Draw();
+
+            if (settings.ESP.Item)
+                itemESP.Draw();
         }
     }
 }

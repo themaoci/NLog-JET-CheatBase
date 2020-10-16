@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cheat.Base.Tools.Structures;
-using Cheat.Base.Tools;
-using Cheat.Base.Tools.Player;
 using System;
+using NLog_CheatBase.Tools.Player;
 
-namespace Cheat.Base.Tools.Structures
+namespace NLog_CheatBase.Tools.Structures
 {
     class PlayerStruct : ESPBase
     {

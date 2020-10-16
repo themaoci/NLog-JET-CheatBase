@@ -1,7 +1,6 @@
-﻿using Cheat.Base;
-using Cheat.Base.Tools;
-using EFT.Interactive;
-using NLog_Example_CheatBase.Tools.Structures;
+﻿using EFT.Interactive;
+using NLog_CheatBase.Tools;
+using NLog_CheatBase.Tools.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NLog_Example_CheatBase.Features
+namespace NLog_CheatBase.Features
 {
     class ExfilESP
     {

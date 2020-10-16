@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog-Example-CheatBase", "NLog-Example-CheatBase.csproj", "{D5D37B5B-4D38-432D-BD92-A6A661F9377A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog-CheatBase", "NLog-CheatBase.csproj", "{D5D37B5B-4D38-432D-BD92-A6A661F9377A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

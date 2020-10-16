@@ -1,10 +1,10 @@
-﻿using Cheat.Base.Tools;
+﻿using NLog_CheatBase.Tools;
 using EFT;
 using System.Reflection;
 using UnityEngine;
 using System.Timers;
 
-namespace Cheat.Base.Features
+namespace NLog_CheatBase.Features
 {
     class FreeCam
     {
