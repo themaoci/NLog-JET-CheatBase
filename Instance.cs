@@ -23,7 +23,7 @@ namespace NLog_CheatBase
         private ExfilESP exfilESP = new ExfilESP();
         private ItemESP itemESP = new ItemESP();
         private ThrowableESP throwableESP = new ThrowableESP();
-
+        public static readonly object _LootDataLocker = new object();
         public static Thread updateLootList_Thread;
         private void Start()
         {
@@ -42,18 +42,20 @@ namespace NLog_CheatBase
                 if (!gameWorld.gameWorldLoaded) {
                     Thread.Sleep(1000); continue; 
                 }
-                
-                List<LootItem>.Enumerator _LootItemList = Instance.gameWorld.LootItems;
-                if(_tmpList.Count != 0)
-                    _tmpList.Clear();
-                if (_LootItemList.Current == null) continue;
-
-                while (_LootItemList.MoveNext())
+                lock (_LootDataLocker)
                 {
-                    if(_LootItemList.Current != null)
-                        _tmpList.Add(_LootItemList.Current);
+                    List<LootItem>.Enumerator _LootItemList = Instance.gameWorld.LootItems;
+                    if (_tmpList.Count != 0)
+                        _tmpList.Clear();
+                    if (_LootItemList.Current == null) continue;
+
+                    while (_LootItemList.MoveNext())
+                    {
+                        if (_LootItemList.Current != null)
+                            _tmpList.Add(_LootItemList.Current);
+                    }
+                    gameWorld.LootList = _tmpList;
                 }
-                gameWorld.LootList = _tmpList;
                 Thread.Sleep(500); // delay execution by 500 ms cause it not need to be updated that much
             }
         }

@@ -19,7 +19,11 @@ namespace NLog_CheatBase.Features
         private List<CorpseStruct> _corpseList = new List<CorpseStruct>();
         private List<LootItem> _LootItemList;
         public void Update() {
-            _LootItemList = Instance.gameWorld.LootList;
+            lock (Instance._LootDataLocker)
+            {
+                _LootItemList = Instance.gameWorld.LootList;
+            }
+            if (_LootItemList == null) return;
             _corpseList.Clear();
             Parallel.For(0, _LootItemList.Count, Instance.maxThreadOptions, i =>
             {

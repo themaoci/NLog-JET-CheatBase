@@ -20,7 +20,11 @@ namespace NLog_CheatBase.Features
         private List<LootItem> _LootItemList;
         public void Update()
         {
-            _LootItemList = Instance.gameWorld.LootList;
+            lock (Instance._LootDataLocker)
+            {
+                _LootItemList = Instance.gameWorld.LootList;
+            }
+            if (_LootItemList == null) return;
             _itemList.Clear();
             Parallel.For(0, _LootItemList.Count, Instance.maxThreadOptions, i =>
             {
