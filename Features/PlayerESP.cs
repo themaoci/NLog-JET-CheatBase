@@ -13,6 +13,7 @@ namespace NLog_CheatBase.Features
 {
     class PlayerESP
     {
+        private ScreenCalc screen_f = new ScreenCalc();
         private static List<PlayerStruct> playerList = new List<PlayerStruct>();
         private static List<PlayerStruct> _TplayerList = new List<PlayerStruct>();
         private Player tpo; // temporal player object;
@@ -48,6 +49,8 @@ namespace NLog_CheatBase.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
+                if (!screen_f.IsOnScreenStrict(curr.Position)) continue;
+
                 // DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f); // if you need a dot for head position ;)
                 _text = $"{curr.ItemInHands}";
                 _size = DrawSystem.Calc.TextSize(_text);

@@ -91,7 +91,7 @@ namespace NLog_CheatBase.Tools.Player
             List<Vector3> bones = GetPlayerBonePositions(player);
             List<Vector3> toReturn = new List<Vector3>();
             for (int i = 0; i < bones.Count; i++) {
-                _tempBonePos = LocalGameWorld.MainCamera.WorldToScreenPoint(bones[i]);
+                _tempBonePos = LocalGameWorld.W2S(bones[i]);
                 toReturn.Add(_tempBonePos);
             }
             return toReturn;

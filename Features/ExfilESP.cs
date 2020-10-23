@@ -12,6 +12,7 @@ namespace NLog_CheatBase.Features
 {
     class ExfilESP
     {
+        private ScreenCalc screen_f = new ScreenCalc();
         private List<ExfiltrationStruct> exfilList = new List<ExfiltrationStruct>();
         private List<ExfiltrationStruct> _exfilList = new List<ExfiltrationStruct>();
         private List<ScavExfiltrationPoint> _exfilsScav;
@@ -51,6 +52,8 @@ namespace NLog_CheatBase.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
+                if (!screen_f.IsOnScreenStrict(curr.Position)) continue;
+
                 //DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f);
                 _text = $"{curr.Name}";
                 _size = DrawSystem.Calc.TextSize(_text);

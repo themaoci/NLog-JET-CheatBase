@@ -10,7 +10,6 @@ namespace NLog_CheatBase.Tools.Structures
 
     public class ESPBase
     {
-
         internal Vector3 _positionBase;
         internal string _objectName;
         internal int _distance;

@@ -14,6 +14,7 @@ namespace NLog_CheatBase.Features
 {
     class ThrowableESP
     {
+        private ScreenCalc screen_f = new ScreenCalc();
         private List<ThrowableStruct> throwableList = new List<ThrowableStruct>();
         private List<ThrowableStruct> _throwableList = new List<ThrowableStruct>();
         private List<Throwable>.Enumerator _throwableEnum;
@@ -46,6 +47,8 @@ namespace NLog_CheatBase.Features
             while (e.MoveNext())
             {
                 var curr = e.Current;
+                if (!screen_f.IsOnScreenStrict(curr.Position)) continue;
+
                 //DrawSystem.Dot.Draw(curr.HeadPosition, Color.yellow, 2f);
                 _text = $"{curr.Name}";
                 _size = DrawSystem.Calc.TextSize(_text);

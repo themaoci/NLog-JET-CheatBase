@@ -84,6 +84,7 @@
     <Compile Include="Tools\DrawSystem.cs" />
     <Compile Include="Tools\GameWorld.cs" />
     <Compile Include="Tools\Player\Bones.cs" />
+    <Compile Include="Tools\ScreenCalc.cs" />
     <Compile Include="Tools\Structures\CorpseStruct.cs" />
     <Compile Include="Tools\Structures\ESPBase.cs" />
     <Compile Include="Instance.cs" />
