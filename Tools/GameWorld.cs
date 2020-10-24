@@ -92,7 +92,7 @@ namespace NLog_CheatBase.Tools
             }
             set { _localplayer = value; }
         }
-        public GClass436<int, Throwable> GrenadesBase
+        public GClass439<int, Throwable> GrenadesBase
         {
             get
             {
